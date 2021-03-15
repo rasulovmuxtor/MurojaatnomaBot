@@ -4,17 +4,15 @@ import sqlite3
 
 from export import excel,pdf
 
-def is_new(user_id):
-    with sqlite3.connect('Murojaat.sqlite3') as conn:
-        conn.row_factory = lambda cursor, row: row[0]
-        cursor = conn.cursor()
-        try:
-            murojaat = cursor.execute("SELECT * FROM murojaatlar where user_id=?",(user_id,)).fetchall()
-            if murojaat == []:
-                return True
-            return murojaat
-        except Exception as e:
-            print(e)
+with sqlite3.connect('Murojaat.sqlite3') as conn:
+    cursor = conn.cursor()
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS "murojaatlar" (
+	"id"	INTEGER PRIMARY KEY AUTOINCREMENT,
+	"user_id"	INTEGER,
+	"name"	TEXT,
+	"murojaat"	TEXT)
+    """)
 
 yangi_murojaat_inline = InlineKeyboardMarkup()
 yangi_murojaat_inline.add(InlineKeyboardButton("Yangi Murojaat yaratish",callback_data='new'))

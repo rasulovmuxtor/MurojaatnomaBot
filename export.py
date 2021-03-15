@@ -35,10 +35,10 @@ def pdf():
     doc = BaseDocTemplate(
         "Murojaatnomalar.pdf",
         pagesize=A4,
-        rightMargin=3,
-        leftMargin=1,
-        topMargin=0,
-        bottomMargin=4,
+        rightMargin=12,
+        leftMargin=5,
+        topMargin=8,
+        bottomMargin=15,
         showBoundary=False)
 
     elements = []
